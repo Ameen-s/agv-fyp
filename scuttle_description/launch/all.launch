@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node name="twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"/>
+    <node name="gmapping" pkg="gmapping" type="slam_gmapping" output="screen"/>
+    <include file="$(find scuttle_description)/launch/rviz.launch">
+    </include>
+  <!---  <include file="$(find scuttle_gazebo)/launch/scuttle_empty_room.launch">-->
+    
+</launch>
