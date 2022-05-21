@@ -1,0 +1,7 @@
+<launch>
+	<arg name="is_physical" default="true"/>
+
+	<include file="$(find scuttle_bringup)/launch/base.launch" >
+		<arg name="is_physical" value="$(arg is_physical)"/>
+	</include>
+</launch>

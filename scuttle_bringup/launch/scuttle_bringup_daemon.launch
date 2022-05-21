@@ -1,0 +1,21 @@
+<launch>
+	<arg name="is_physical" default="true"/>
+
+	<group if="$(arg is_physical)">
+		<include file="$(find teleop_twist_joy)/launch/teleop.launch"></include>
+	</group>
+
+	<include file="$(find scuttle_bringup)/launch/base.launch" >
+		<arg name="is_physical" value="$(arg is_physical)"/>
+	</include>
+
+	<!--
+		This assumes we have something writing to the /scan topic, e.g. a LIDAR or something.
+		Without it gmapping will not start.
+	-->
+	<!--
+	<include file="$(find scuttle_slam)/launch/scuttle_slam.launch">
+		<arg name="slam_methods" value="gmapping"/>
+  	</include>
+	-->
+</launch>

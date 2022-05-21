@@ -1,0 +1,27 @@
+<launch>
+	<arg name="is_physical" default="true"/>
+	<param name="enable_tf_publish" value="true"/>
+	<param name="enable_joint_state_publish" value="true"/>
+
+	<group unless="$(arg is_physical)">
+		<param name ="/use_sim_time" value="true"/>
+
+		<!-- Don't need a lidar here because the gazebo files already have that included -->
+	</group>
+
+	<group if="$(arg is_physical)">
+		<param name ="/use_sim_time" value="false"/>
+		<node name="scuttle_driver" pkg="scuttle_driver" type="scuttle_driver.py" output="screen"/>
+	</group>
+
+	<!--
+		We don't include the SLAM node here because gmapping puts out a lot of logs to the console that can't be
+		silenced. So instead we run that as a stand-alone node. That way gmapping won't polute the navigation logs
+	-->
+
+	<include file="$(find scuttle_navigation)/launch/scuttle_navigation.launch">
+		<arg name="map_file" value="$(find scuttle_navigation)/maps/map.yaml"/>
+		<arg name="move_forward_only" value="false"/>
+		<arg name="is_physical" value="$(arg is_physical)"/>
+	</include>
+</launch>
