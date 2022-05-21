@@ -1,0 +1,13 @@
+<launch>
+  <!-- Move scuttle to avoid the dynamic objects, at least initially -->
+  <arg name="x_pos" default="2.0"/>
+  <arg name="y_pos" default="2.0"/>
+  <arg name="z_pos" default="0.0"/>
+
+  <include file="$(find scuttle_gazebo)/launch/base.launch">
+    <arg name="world_name" value="$(find scuttle_gazebo)/worlds/scuttle_dynamic_room.world"/>
+    <arg name="x_pos" value="$(arg x_pos)"/>
+    <arg name="y_pos" value="$(arg y_pos)"/>
+    <arg name="z_pos" value="$(arg z_pos)"/>
+  </include>
+</launch>
